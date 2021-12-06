@@ -62,7 +62,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--log', action='store_true', help="Активировать логгирование")
     parser.add_argument('--delay', type=int, default=0, help="Задержка ответа в секундах")
-    parser.add_argument('--folder', type=str, default='archive/', help="Папка с фотографиями")
+    parser.add_argument('--folder', type=str, default='archive', help="Папка с фотографиями")
     args = parser.parse_args()
     archivate = partial(archivate, args=args)
 
