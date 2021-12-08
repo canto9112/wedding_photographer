@@ -14,8 +14,8 @@ async def get_archive(request, log, delay, folder):
 
     archive_hash = request.match_info['archive_hash']
 
-    if not os.path.exists(f'{folder}/{archive_hash}'):
-        logging.error(f'Page {folder}/{archive_hash} not found')
+    if not os.path.join(folder, archive_hash):
+        logging.error(f'Page {os.path.join(folder, archive_hash)} not found')
         raise web.HTTPNotFound(text='Архив не существует или был удален')
 
     process = await asyncio.create_subprocess_exec(
