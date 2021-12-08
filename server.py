@@ -25,8 +25,7 @@ async def get_archive(request, log, delay, folder):
         cwd=folder,
     )
     response = web.StreamResponse()
-    response.headers['Content-Type'] = 'application/zip'
-    response.headers['Content-Disposition'] = 'form-data'
+    response.headers['Content-Disposition'] = f'attachment; filename={archive_hash}.zip'
 
     await response.prepare(request)
     try:
