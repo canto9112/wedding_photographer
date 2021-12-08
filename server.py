@@ -16,7 +16,7 @@ async def archivate(request, log, delay, folder):
 
     if not os.path.exists(f'{folder}/{archive_hash}'):
         logging.error(f'Page {folder}/{archive_hash} not found')
-        raise web.HTTPNotFound(text="Архив не существует или был удален")
+        raise web.HTTPNotFound(text='Архив не существует или был удален')
 
     process = await asyncio.create_subprocess_exec(
         'zip', '-r', '-', archive_hash,
@@ -56,9 +56,9 @@ async def handle_index_page(request):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log', action='store_true', help="Активировать логгирование")
-    parser.add_argument('--delay', type=int, default=0, help="Задержка ответа в секундах")
-    parser.add_argument('--folder', type=str, default='archive', help="Папка с фотографиями")
+    parser.add_argument('--log', action='store_true', help='Активировать логгирование')
+    parser.add_argument('--delay', type=int, default=0, help='Задержка ответа в секундах')
+    parser.add_argument('--folder', type=str, default='archive', help='Папка с фотографиями')
     args = parser.parse_args()
     archivate = partial(archivate, log=args.log, delay=args.delay, folder=args.folder)
 
