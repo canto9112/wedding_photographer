@@ -8,12 +8,8 @@ import aiofiles
 from aiohttp import web
 
 
-async def archivate(request, args):
-    logger = args.log
-    delay = args.delay
-    folder = args.folder
-
-    if logger:
+async def archivate(request, log, delay, folder):
+    if log:
         logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s', level=logging.DEBUG)
 
     archive_hash = request.match_info['archive_hash']
@@ -64,7 +60,7 @@ if __name__ == '__main__':
     parser.add_argument('--delay', type=int, default=0, help="Задержка ответа в секундах")
     parser.add_argument('--folder', type=str, default='archive', help="Папка с фотографиями")
     args = parser.parse_args()
-    archivate = partial(archivate, args=args)
+    archivate = partial(archivate, log=args.log, delay=args.delay, folder=args.folder)
 
     app = web.Application()
     app.add_routes([
